@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ice="http://www.icesoft.com/icefaces/component"
+                xmlns:ace="http://www.icefaces.org/icefaces/components"
+                template="./WEB-INF/templates/layout.xhtml">
+
+    <ui:define name="styles">
+        <style type="text/css">
+            .titulo-form {
+                font-size: 14pt;
+                font-weight: bold;
+                margin: 10px 0;
+            }
+            .iceOutLbl {
+                display: inline-block;
+                margin-left: 4px;
+                width: 50px;
+            }
+            
+            .icePnlGrp {
+                margin-top: 4px;
+            }
+        </style>
+    </ui:define>
+    
+    <ui:define name="metadata">
+    </ui:define>
+
+    <ui:define name="javascript">
+    </ui:define>
+
+    <ui:define name="content">
+        <ice:form>
+            
+            <ice:panelGroup style="text-align: left; margin-bottom: 10px;">
+                <ice:panelGroup>
+                    <ice:outputLabel for="cnpj" value="CNPJ"/>
+                    <ace:maskedEntry id="cnpj" value="#{cadastroBean.revendedor.cnpj}"  mask="99.999.999/9999-99"
+                                     label="CNPJ" size="20" required="true">
+                        <f:validator validatorId="CNPJValidator"/>
+                        <f:converter converterId="CNPJConverter"/>
+                    </ace:maskedEntry>
+                </ice:panelGroup>
+                <ice:panelGroup>
+                    <ice:outputLabel for="razao" value="Razão Social"/>
+                    <ice:inputText id="razao" value="#{cadastroBean.revendedor.razao}" size="40"
+                         styleClass="ui-inputfield" label="razao" maxlength="50" required="true"/>
+                </ice:panelGroup>
+                <ice:panelGroup>
+                    <ice:outputLabel for="fantasia" value="Nome Fantasia"/>
+                    <ice:inputText id="fantasia" value="#{cadastroBean.revendedor.fantasia}" size="40"
+                         styleClass="ui-inputfield" label="fantasia" maxlength="50" required="true"/>
+                </ice:panelGroup>
+                <ice:panelGroup>
+                    <ice:outputLabel for="endereco" value="Endereço"/>
+                    <ice:inputText id="endereco" value="#{cadastroBean.revendedor.endereco}" size="40"
+                         styleClass="ui-inputfield" label="endereco" maxlength="50" required="true"/>
+                </ice:panelGroup>
+                <ice:panelGroup>
+                    <ice:outputLabel for="cidade" value="Cidade"/>
+                    <ice:inputText id="cidade" value="#{cadastroBean.revendedor.cidade}" size="40"
+                         styleClass="ui-inputfield" label="cidade" maxlength="30" required="true"/>
+                </ice:panelGroup>
+                <ice:panelGroup>
+                    <ice:outputLabel for="regiao" value="Região de atuação"/>
+                    <ice:selectOneMenu id="regiao" value="#{cadastroBean.revendedor.regiao}" style="width:12em" styleClass="ui-selectonemenu">
+                        <f:selectItems value="#{cadastroBean.regiaoItemList}"/>
+                    </ice:selectOneMenu>
+                    <ice:outputLabel for="estado" value="Estado"/>
+                    <ice:selectOneMenu id="estado" value="#{cadastroBean.revendedor.estado}" style="width:12em" styleClass="ui-selectonemenu">
+                        <f:selectItems value="#{cadastroBean.estadoItemList}"/>
+                    </ice:selectOneMenu>
+                </ice:panelGroup>
+            </ice:panelGroup>
+            <ice:commandButton value="Continuar" action="#{cadastroBean.cadastroAction}" style="margin-top: 1em"/>
+            <ice:messages/>
+        </ice:form>
+    </ui:define>
+
+</ui:composition>
